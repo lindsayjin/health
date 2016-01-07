@@ -1,0 +1,39 @@
+{% extends "health/base.html" %}
+{% block title %}Optional Input{% endblock %}
+{% block content %}
+<div class = "container">
+	<h1>Optional Inputs</h1>
+	<p> Input your own values for the inputs below, or use our underlying data from other sources. </p>
+	<form action = '/health/result/' method = 'post' class = "pure-form pure-form-aligned"> 
+		{% csrf_token %}
+		{% for field in form %}
+			{% if field.name == "pop" %}
+				<div class="setWrapper">
+					<p class="set">General Information</p>
+				</div>
+			{% elif field.name == "y_LC_0_4" %}
+				<div class="setWrapper">
+					<p class="set">Incidence rate of Lung Cancer for different age groups (deaths/100,000 people)</p>
+				</div>
+			{% elif field.name == "y_CP_0_4" %}
+				<div class="setWrapper">
+					<p class="set">Incidence rate of Cardiopulmonary Diseases for different age groups (deaths/100,000 people)</p>
+				</div>
+			{% elif field.name == "y_ARI" %}
+				<div class="setWrapper">
+					<p class="set">Incidence rate of Acute Respiratory Infections (deaths/100,000 people)</p>
+				</div>
+			{% endif %}
+			<div class="fieldWrapper">
+	    		{{ field.errors }}
+	    		{{ field.label_tag }} {{ field }}
+	    		{% if field.help_text %}
+	    		<p class="help">{{ field.help_text|safe }}</p>
+    			{% endif %}
+    		</div>
+		{% endfor %}
+		<br></br>
+		<input type = 'submit' value = 'Submit' />
+	</form>
+</div>
+{% endblock %}

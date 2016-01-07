@@ -1,0 +1,11 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'health/style.css' %}" />
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<!--    <img src="{% static "images/sitelogo.png" %}" alt="Logo" /> -->
+    {% block content %}{% endblock %}
+</body>
+</html>

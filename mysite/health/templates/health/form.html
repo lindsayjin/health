@@ -1,0 +1,20 @@
+<form>
+  {% for fieldset in form.fieldsets %}
+  <fieldset>
+    <legend>{{ fieldset.title }}</legend>
+    
+    <ul>
+      {% for field in fieldset %}
+        <li>
+          {{ field.label_tag }}
+          {{ field }}
+          {{ field.help_text }}
+          {{ field.errors }}
+        </li>
+      {% endfor %}
+    </ul>
+  </fieldset>
+  {% endfor %}
+  
+  <!-- submit button -->
+</form>

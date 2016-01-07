@@ -1,0 +1,83 @@
+{% extends "health/base.html" %}
+{% block title %}ICCT health tool{% endblock %}
+{% block content %}
+<div class = "container">
+	<h1>ICCT health tool</h1>
+	<p>This tool is designed to be used in combination with the Port Emissions Tool for rapid assessment of the health impact from port emissions. See details below, or click continue to access the tool. </p>
+	<h2>Model</h2>
+	<p>This is part 3 of a 3-phase project. The first phase is the Port Emissions Tool, where port emissions are estimated from port activities. The second phase is building the emissions to concentrations matrix for 6 specific ports, including Aqaba, Chittagong, Jakarta, Shenzhen, Tema, Valparaiso, and four generalized ports (see Appendix for details). The four general ports face four different directions, and are designed to be used as any port that faces the same direction. The domain is 100km * 100km. The third phase is assessing the health impact of port emissions using the matrix developed in the second step. The algorithm of this tool is based on ICCT health model. See details <a href = "http://www.theicct.org/global-health-roadmap"> here </a>. Pollutants include fine primary PM2.5, secondary sulfates and secondary nitrates. Diseases include acute respiratory infections (ARI), lung cancer (LC) and cardiopulmonary (CP) diseases. This tool is designed for rapid assessment only. Each run of the model only calculates the health impact from that specific year’s port emissions and the results are not lagged. Results are not saved to a database.</p>
+	<h2>Data</h2>
+	<p>Population data in the domains: <a href = "http://sedac.ciesin.columbia.edu/gpw/index.jsp"> Gridded Population of the World, Version 3 (GPWv3) Data Collection </a><sup><a href="#fn1" id = "ref1">1</a></sup></p>
+	<p>Population growth rate and structure:  <a href = "http://esa.un.org/unpd/wpp/Download/Standard/Population/"> United Nations, Department of Economic and Social Affairs, Population Division (2015). World Population Prospects: The 2015 Revision </a></p>
+	<p>Incidence rate: <a href = "http://ghdx.healthdata.org/"> GBD 2013 data </a></p>
+	<p>Ambient concentration: <a href = "http://sedac.ciesin.columbia.edu/data/set/sdei-global-annual-avg-pm2-5-2001-2010/data-download"> Global Annual Average PM2.5 Grids from MODIS and MISR Aerosol Optical Depth (AOD).</a><sup><a href="#fn2" id = "ref2">2,</a></sup><sup><a href="#fn3" id = "ref3">3</a></sup></p>
+	<h2>Inputs</h2>
+	<h3>Required Inputs</h3>
+	<p>These are the inputs that are necessary for the model to calculate the health impact. The model either cannot choose them for the user, or does not have such data itself. These fields are now pre-filled with dummy data. Please change them to real data. (specify which field of the PEIT output corresponds to what input here….)</p>
+	<p><span class = "input">Port: </span>Choose specific port if it applies, otherwise choose the general port. The user will also need to choose a direction that the port is facing when choosing to use a generalized port. For example, if a port has open water on the northern part and land on the southern part, its direction is north.</p>
+	<p><span class = "input">Modeled year: </span>2001 to 2014. Due to data availability,  the model does not have ambient PM2.5 concentration data for years after 2010. Ambient concentration of 2010 will be used instead for years after 2010. Users can input thier own concentration data in the ‘optional inputs’ page.  </p>
+	<p><span class = "input">Total annual PM10 emissions: </span>This is used to estimate the concentration of PM10, which is required to calculate deaths from ARI. </p>
+	<p><span class = "input">Direction: </span>Only need to input the direction when choosing a general port. The model will ignore this input if the user did not choose a general port.</p>
+	<p><span class = "input">Emissions: </span>These emissions data are in the output of the Port Emissions Tool.</p>
+	<h3>Optional Inputs</h3>
+	<p>These inputs are optional for the model to calculate the health impact of port emissions. </p>
+	<p><span class = "input">Population: </span>Pre-filled with data in the model according to the port and year chosen in the  ‘required inputs’ page. Users can change it. The tool is modeling the whole 100*100 km domain to include impacts of secondary PM, so if the user inputs city population instead of domain population, the health impact will be underestimated (assuming the domain is larger than the city).</p>
+	<p><span class = "input">Ambient concentration: </span>Pre-filled with data from the model according to the port and year chosen in the  ‘required inputs’ page. Users can change it.</p>
+	<p><span class = "input">Incidence rates: </span>Rather than using the model's incidence rate data, users can input their own data. Lung cancer and cardiopulmonary diseases only apply to people with an age of 30 or above. Acute respiratory Infections only apply to children under 5 years old. Unit is deaths/ 100,000 people. Users must input all incidence rates listed on this page if they wish to use their own incidence rate data. If they leave some of them blank, the tool will still use its own underlying data. On the results page, users will be able to see if the model uses its own data or the user’s incidence rate data.</p>
+	<h2>Results</h2>
+	<p>This page shows health impact broken down by different categories. If there are no text under the title ‘Results’ saying that the model is using the user’s incidence rate data, then the model is using its own incidence rate data in the calculations. Each port has three broad areas, on-shore, off-shore and port activities (see Appendix for what emissions are included in each area). Each one of these three areas contains one or more emissions zones. The number of zones in each area for all the ports are detailed below. For example, zone 1-5 in Shenzhen are in the port activities area. Clicking ‘Back’ will return to the instructions page. </p>
+	<table class= "pure-table pure-table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Aqaba</th>
+                    <th>Chittagong</th>
+                    <th>Jakarta</th>
+                    <th>Shenzhen</th>
+                    <th>Tema</th>
+                    <th>Valparaiso</th>
+                    <th>General</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>port</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>on-shore</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>off-shore</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>2</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+<div class = "container">
+	<a href = "/health/input/"> Continue </a>
+</div>
+<hr></hr>
+<p><sup id = "fn1">1.Center for International Earth Science Information Network (CIESIN), Centro Internacional de Agricultura Tropical (CIAT), 2005. Palisades, NY: CIESIN, Columbia University<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup></p>
+<p><sup id="fn2">2.Battelle Memorial Institute, and Center for International Earth Science Information Network - CIESIN - Columbia University. 2013. Palisades, NY: NASA Socioeconomic Data and Applications Center (SEDAC).<a href="http://dx.doi.org/10.7927/H4H41PB4">Link</a>. <a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup></p>
+<p><sup id="fn3">3.de Sherbinin, A., M. Levy, E. Zell, S. Weber, and M. Jaiteh. 2014. Using Satellite Data to Develop Environmental Indicators. Environmental Research Letters 9 (8): 084013. <a href="http://dx.doi.org/10.1088/1748-9326/9/8/084013">Link</a>.<a href="#ref3" title="Jump back to footnote 3 in the text.">↩</a></sup></p>
+{% endblock %}

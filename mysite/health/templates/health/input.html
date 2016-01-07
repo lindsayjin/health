@@ -1,0 +1,38 @@
+{% extends "health/base.html" %}
+{% block title %}Input{% endblock %}
+{% block content %}
+<div class = "container">
+	<h1>Required Inputs</h1>
+	<form action = '/health/optionalinput/' method = 'post' class = "pure-form pure-form-aligned">
+		{% csrf_token %}
+		{% for field in form %}
+			{% if field.name == "em_fpm_port" %}
+				<div class="setWrapper">
+					<p class="set">Primary PM2.5 Emissions (ton)</p>
+				</div>
+			{% elif field.name == "em_sox_port" %}
+				<div class="setWrapper">
+					<p class="set">SOx Emissions (ton)</p>
+				</div>
+			{% elif field.name == "em_nox_port" %}
+				<div class="setWrapper">
+					<p class="set">NOx Emissions (ton)</p>
+				</div>
+			{% elif field.name == "port" %}
+				<div class="setWrapper">
+					<p class="set">General Information</p>
+				</div>
+			{% endif %}
+			<div class="fieldWrapper">
+	    		{{ field.errors }}
+	    		{{ field.label_tag }} {{ field }}
+	    		{% if field.help_text %}
+	    		<p class="help">{{ field.help_text|safe }}</p>
+    			{% endif %}
+    		</div>
+		{% endfor %}
+		<br></br>
+		<input type = 'submit' value = 'Submit' />
+	</form>
+</div>
+{% endblock %}

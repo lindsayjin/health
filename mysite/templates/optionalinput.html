@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Optional Input{% endblock %}
+{% block content %}
+<p> Input your own values for the inputs below, or use our underlying data from other sources. </p>
+<form action = '/result/' method = 'post'>
+	{% csrf_token %}
+	{{ OptionalForm(inital = context))}}
+	<input type = 'submit' value = 'Submit' />
+</form>
+{% endblock %}

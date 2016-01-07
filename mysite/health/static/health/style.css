@@ -1,0 +1,53 @@
+
+/*
+.Row
+{
+    display: table;
+    width: 100%; 
+    table-layout: fixed; 
+    border-spacing: 10px; 
+}
+.Column
+{
+    display: table-cell;
+    background-color: red; 
+}
+*/
+.container
+{
+	padding: 15px;
+	margin: 15px
+}
+
+.section
+{
+	padding: 10px;
+	margin: 10px
+}
+
+table
+{
+	width: 90%;
+}
+
+.setWrapper
+{
+	margin-left: 5px
+}
+
+.fieldWrapper
+{
+	margin-left: 15px
+}
+
+.set 
+{
+	font-size: 1.05em;
+	font-weight: bold
+}
+
+span.input 
+{
+	font-weight: bold
+}
+
